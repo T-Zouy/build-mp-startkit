@@ -1,0 +1,21 @@
+{
+  "name": "ouy-build-cli",
+  "version": "1.0.0",
+  "description": "build mpvue project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mpvue",
+    "startkit"
+  ],
+  "author": "ouy",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.17.1",
+    "download-git-repo": "^1.1.0",
+    "ora": "^3.0.0"
+  }
+}
