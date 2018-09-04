@@ -4,6 +4,8 @@
   "description": "build mpvue project",
   "main": "index.js",
   "scripts": {
+    "init-ouy": "node ./bin/build.js",
+    "ouy-init": "node ./bin/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,6 +18,7 @@
     "chalk": "^2.4.1",
     "commander": "^2.17.1",
     "download-git-repo": "^1.1.0",
+    "inquirer": "^6.2.0",
     "ora": "^3.0.0"
   }
 }

@@ -10,7 +10,7 @@ const chalk = require('chalk');
 const ora = require('ora');
 
 program
-    .version('0.1.0')
+    .version('1.0.0')
     .option('i, init', '初始化ouy-mpvue-startkit项目')
 
 program
@@ -20,48 +20,32 @@ const nameQuestion = {
     type: 'input',
     message: `项目名称: `,
     name: 'name',
-    default: 'x-build'
+    default: 'mpvue-startkit'
 };
 
 const versionQuestion = {
     type: 'input',
     message: `初始版本: `,
     name: 'version',
-    default: '0.0.1'
+    default: '1.0.0'
 };
 
-const portQuestion = {
+const descriptionQuestion = {
     type: 'input',
-    message: `server端口: `,
-    name: 'port',
-    default: '8080'
-};
-
-const templateQuestion = {
-    type: 'confirm',
-    message: `使用pug(jade)模版引擎? `,
-    name: 'template',
-    default: true
-};
-
-const remQuestion = {
-    type: 'confirm',
-    message: `使用px2rem布局? `,
-    name: 'rem',
-    default: true
-};
+    message: `A Project of Mpvue: `,
+    name: 'description',
+    default: '1.0.0'
+}
 
 if (program.init) {
     console.info('');
     inquirer.prompt([
         nameQuestion,
         versionQuestion,
-        portQuestion,
-        templateQuestion,
-        remQuestion
+        descriptionQuestion
     ]).then(function (answers) {
-        const spinner = ora('正在从github下载x-build').start();
-        download('codexu/x-build', answers.name, function (err) {
+        const spinner = ora('正在从github下载mp-startkit-ouy').start();
+        download('/T-Zouy/mp-startkit-ouy', answers.name, function (err) {
             if (!err) {
                 spinner.clear()
                 console.info('');
@@ -73,28 +57,17 @@ if (program.init) {
                 console.info(chalk.cyan(` -  npm install / yarn`));
                 console.info(chalk.cyan(` -  npm start / npm run dev`));
                 console.info('');
-                console.info(chalk.gray(`devServer: http://localhost:${answers.port}`));
-                console.info('');
-                console.info(chalk.gray('参考文档: https://github.com/codexu/x-build'));
+                console.info(chalk.gray('参考文档: https://github.com/T-Zouy/mp-startkit-ouy'));
                 console.info('');
                 console.info(chalk.green('-----------------------------------------------------'));
                 console.info('');
-
-                if (answers.template === true) {
-                    fs.unlinkSync(`${process.cwd()}/${answers.name}/src/index.html`);
-                } else {
-                    fs.unlinkSync(`${process.cwd()}/${answers.name}/index.pug`);
-                    fs.unlinkSync(`${process.cwd()}/${answers.name}/src/app.pug`);
-                }
 
                 fs.readFile(`${process.cwd()}/${answers.name}/package.json`, (err, data) => {
                     if (err) throw err;
                     let _data = JSON.parse(data.toString())
                     _data.name = answers.name
                     _data.version = answers.version
-                    _data.port = answers.port
-                    _data.template = answers.template ? "pug" : "html"
-                    _data.rem = answers.rem
+                    _data.description = answers.description
                     let str = JSON.stringify(_data, null, 4);
                     fs.writeFile(`${process.cwd()}/${answers.name}/package.json`, str, function (err) {
                         if (err) throw err;
@@ -102,7 +75,7 @@ if (program.init) {
                     })
                 });
             } else {
-                spinner.warn(['发生错误，请在https://github.com/codexu，Issues留言'])
+                spinner.warn(['发生错误，请在https://github.com/T-Zouy/build-mp-startkit，Issues留言'])
                 process.exit()
             }
         })
